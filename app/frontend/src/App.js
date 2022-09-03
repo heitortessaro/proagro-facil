@@ -1,9 +1,12 @@
-import './App.css';
+import { Routes } from 'react-router-dom';
 
 export default function App() {
   return (
-    <h1 className="text-3xl font-bold underline mt-10 bg-orange-800">
-      Test Container 2!
-    </h1>
+    <div className="bg-main-body">
+      <h1 className="m-10">Test</h1>
+      <Routes>
+        {/* <Route path="/" element={ <Home /> } /> */}
+      </Routes>
+    </div>
   );
 }
