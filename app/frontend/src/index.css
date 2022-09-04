@@ -28,3 +28,7 @@ body {
 .page-title{
   @apply justify-self-start text-2xl font-semibold mb-6
 }
+
+.message {
+  @apply border border-stone-700 p-3 w-1/2 font-semibold
+}
