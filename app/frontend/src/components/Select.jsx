@@ -25,6 +25,7 @@ export default function Select() {
             focus:outline-none
             focus:bg-white focus:border-gray-500"
           id="grid-state"
+          name="select"
         >
           {eventTypes.map((e) => <option key={ e }>{e}</option>)}
         </select>
