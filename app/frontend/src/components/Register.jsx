@@ -5,15 +5,31 @@ import Select from './Select';
 
 export default function Register() {
   const [showMessage, setShowMessage] = useState(false);
-  const [message, setMessage] = useState('teste');
+  const [message, setMessage] = useState('');
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const { target } = e;
-    console.log(target.select.value);
+    const { name, cpf, email, latitude, longitude, type, date, select: event } = target;
+    if (!validateCPF(cpf.value)) {
+      setMessage('CPF inválido');
+      setShowMessage(true);
+      return;
+    }
     setShowMessage(true);
-    setMessage('foi');
-    console.log(validateCPF(target.cpf.value));
+    const formData = {
+      name: name.value,
+      cpf: cpf.value,
+      email: email.value,
+      latitude: latitude.value,
+      longitude: longitude.value,
+      type: type.value,
+      date: date.value,
+      event: event.value,
+    };
+    console.log(formData);
   };
+
   return (
     <div className="w-full flex flex-col justify-center items-center ">
       <h2 className="page-title">Busca e Cadastro</h2>
@@ -65,15 +81,12 @@ export default function Register() {
               id="form-cpf"
               type="text"
               placeholder="Apenas números"
+              maxLength="11"
             />
           </label>
         </div>
         <div className="w-1/2  px-3">
-          <label
-            className="
-              label-form"
-            htmlFor="formt-latitude"
-          >
+          <label className="label-form" htmlFor="formt-latitude">
             (Localização) Latitude
             <input
               name="latitude"
@@ -132,7 +145,7 @@ export default function Register() {
           </button>
         </div>
       </form>
-      {showMessage && <p>{message}</p>}
+      {showMessage && <p className="message">{message}</p>}
     </div>
   );
 }
