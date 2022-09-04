@@ -4,6 +4,7 @@ export default function Navbar() {
   return (
     <nav
       className="
+        max-w-[1200px]
         w-full
         h-[60px]
         flex
@@ -18,7 +19,7 @@ export default function Navbar() {
       <div>
         <img className="w-16" src="https://softfocus.com.br/wp-content/themes/softfocus/imagens/softfocus.svg" alt="softfocus" />
       </div>
-      <h1 className="text-2xl font-bold">Proagro Fácil</h1>
+      <h1 className="text-2xl font-bold self-center">Proagro Fácil</h1>
       <ul className="flex space-x-6 items-center">
         <li>
           <a href="/">Cadastro/Atualização</a>
