@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
+import validateCPF from '../services/validateCPF';
 import Select from './Select';
 // import eventTypes from '../services/eventTypes';
 
-export default function Search() {
+export default function Register() {
   const [showMessage, setShowMessage] = useState(false);
   const [message, setMessage] = useState('teste');
   const handleSubmit = (e) => {
     e.preventDefault();
     const { target } = e;
-    console.log(target.register.value);
+    console.log(target.select.value);
     setShowMessage(true);
     setMessage('foi');
+    console.log(validateCPF(target.cpf.value));
   };
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center ">
@@ -43,6 +45,7 @@ export default function Search() {
           >
             E-mail
             <input
+              name="email"
               className="input-form"
               id="form-email"
               type="text"
@@ -57,6 +60,7 @@ export default function Search() {
           >
             CPF
             <input
+              name="cpf"
               className="input-form"
               id="form-cpf"
               type="text"
@@ -72,6 +76,7 @@ export default function Search() {
           >
             (Localização) Latitude
             <input
+              name="latitude"
               className="input-form"
               id="formt-latitude"
               type="text"
@@ -83,6 +88,7 @@ export default function Search() {
           <label className="label-form" htmlFor="formt-longitude">
             (Localização) Longitude
             <input
+              name="longitude"
               className="input-form"
               id="formt-longitude"
               type="text"
@@ -94,6 +100,7 @@ export default function Search() {
           <label className="label-form" htmlFor="form-type">
             Tipo da Lavoura
             <input
+              name="type"
               className="input-form"
               id="form-type"
               type="text"
@@ -105,6 +112,7 @@ export default function Search() {
           <label className="label-form" htmlFor="form-date">
             Data da Colheita
             <input
+              name="date"
               className="input-form"
               id="form-date"
               type="date"
