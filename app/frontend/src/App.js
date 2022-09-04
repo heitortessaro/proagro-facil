@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
+import Delete from './components/Delete';
 import Navbar from './components/Navbar';
 import Register from './components/Register';
+import Search from './components/Search';
+import Update from './components/Update';
 
 export default function App() {
-  const [service, setService] = useState('register');
+  const [showService, setService] = useState('register');
   const selectService = ({ target }) => {
-    console.log(target.value);
-    setService('register');
+    // console.log(target.value);
+    setService(target.value);
   };
-  console.log(service);
+  console.log(showService);
   return (
     <div className="w-full h-screen max-w-[1000px] mx-auto">
       <Navbar />
@@ -28,7 +31,10 @@ export default function App() {
           </select>
         </label>
       </div>
-      {service === 'register' && <Register />}
+      {showService === 'register' && <Register />}
+      {showService === 'update' && <Update />}
+      {showService === 'search' && <Search />}
+      {showService === 'delete' && <Delete />}
     </div>
   );
 }
