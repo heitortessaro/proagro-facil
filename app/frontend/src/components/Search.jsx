@@ -5,7 +5,6 @@ import Select from './Select';
 export default function Search() {
   return (
     <form className="w-full max-w-lg flex flex-wrap mx-3 mb-6">
-
       <div className="w-full px-3 mb-6 md:mb-0">
         <label
           className="
@@ -20,7 +19,6 @@ export default function Search() {
             placeholder="Nome"
           />
         </label>
-        {/* <p className="text-red-500 text-xs italic">Please fill out this field.</p> */}
       </div>
       <div className="w-full px-3">
         <label
@@ -113,20 +111,10 @@ export default function Search() {
         </label>
       </div>
       <Select />
+      <div className="w-full flex justify-around px-3 mt-3 mb-6 md:mb-0">
+        <button className="w-1/3 button-form" type="button">Cadastrar</button>
+        <button className="w-1/3 button-form" type="button">Atualizar</button>
+      </div>
     </form>
   );
 }
-
-// a. Nome do produtor rural;
-// b. E-mail do produtor rural;
-// c. CPF do produtor rural;
-// d. Localização da lavoura (latitude e longitude);
-// e. Tipo da lavoura (milho, soja, trigo, feijão, etc);
-// f. Data da colheita;
-// g. Evento ocorrido, sendo os eventos possíveis:
-// i. CHUVA EXCESSIVA
-// ii. GEADA
-// iii. GRANIZO
-// iv. SECA
-// v. VENDAVAL
-// vi. RAIO

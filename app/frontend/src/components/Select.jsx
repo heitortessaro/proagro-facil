@@ -3,7 +3,7 @@ import eventTypes from '../services/eventTypes';
 
 export default function Select() {
   return (
-    <div className="w-1/2 px-3 mb-6 md:mb-0">
+    <div className="w-full px-3 mb-6 md:mb-0">
       <label
         className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
         htmlFor="grid-state"
