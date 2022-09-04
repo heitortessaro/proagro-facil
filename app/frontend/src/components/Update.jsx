@@ -3,7 +3,7 @@ import validateCPF from '../services/validateCPF';
 import Select from './Select';
 // import eventTypes from '../services/eventTypes';
 
-export default function Register() {
+export default function Update() {
   const [showMessage, setShowMessage] = useState(false);
   const [message, setMessage] = useState('teste');
   const handleSubmit = (e) => {
@@ -16,7 +16,7 @@ export default function Register() {
   };
   return (
     <div className="w-full flex flex-col justify-center items-center ">
-      <h2 className="page-title">Busca e Cadastro</h2>
+      <h2 className="page-title">Atualiza Cadastro</h2>
       <form
         className="w-full max-w-lg flex flex-wrap mx-3 mb-6"
         onSubmit={ handleSubmit }
@@ -125,10 +125,10 @@ export default function Register() {
           <button
             className="w-1/3 button-form"
             type="submit"
-            value="register"
-            name="register"
+            value="update"
+            name="update"
           >
-            Cadastrar
+            Atualizar
           </button>
         </div>
       </form>
