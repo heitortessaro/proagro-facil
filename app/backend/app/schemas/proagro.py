@@ -2,7 +2,7 @@ from datetime import date
 from pydantic import BaseModel, EmailStr, Field
 
 
-class StudentSchema(BaseModel):
+class RegisterSchema(BaseModel):
     name: str = Field(...)
     email: EmailStr = Field(...)
     cpf: str = Field(...)
