@@ -1,5 +1,15 @@
 version: '3.9'
 services:
+  db:
+    image: mongo
+    container_name: db
+    platform: linux/x86_64
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - ~/apps/mongo:/data/db
+
   frontend:
     build: ./frontend
     ports:
