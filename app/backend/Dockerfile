@@ -1,23 +1,28 @@
-# pull official base image
-FROM python:3.9.4-alpine
+FROM python:3.8
 
-# set work directory
-WORKDIR /usr/src/app
+WORKDIR /app-backend
 
-# set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+COPY requirements.txt ./
 
-# copy requirements file
-COPY ./requirements.txt /usr/src/app/requirements.txt
+RUN pip3 install -r requirements.txt
 
-# install dependencies
-RUN set -eux \
-    && apk add --no-cache --virtual .build-deps build-base \
-        libressl-dev libffi-dev gcc musl-dev python3-dev \
-    && pip install --upgrade pip setuptools wheel \
-    && pip install -r /usr/src/app/requirements.txt \
-    && rm -rf /root/.cache/pip
+COPY . .
 
-# copy project
-COPY . /usr/src/app/
+# RUN python3 app/main.py
+CMD ["uvicorn", "app.main:app",  "--host", "0.0.0.0", "--port", PORT]
+
+
+
+# FROM node:16.14-alpine
+
+# WORKDIR /app-frontend
+
+# COPY package.json ./
+
+# RUN npm install
+
+# COPY . .
+
+# EXPOSE 3000
+
+# CMD ["npm","start"]
