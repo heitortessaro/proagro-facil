@@ -4,7 +4,9 @@ from fastapi.encoders import jsonable_encoder
 from app.model.proagro import (
   add_register,
   fetch_one_register,
-  fetch_all
+  fetch_all,
+  delete_register,
+  update_register,
 )
 
 from app.schemas.proagro import (
@@ -48,3 +50,24 @@ async def get_by_id(id):
     if response:
         return response 
     raise HTTPException(404, f"Não existe registro de evento com o id {id}")
+
+@router.delete(
+  "/{id}",
+  status_code=204,
+  response_description="Apaga o registro de evento com o id fornecido",
+  )
+async def delete_by_id(id):
+    response = await delete_register(id)
+    if response:
+      return
+    raise HTTPException(404, f"Não existe registro de evento com o id {id}")
+
+@router.put(
+  "/{id}",
+  status_code=200,
+  response_description="Atualiza o registro de evento com o id fornecido usando os dados do body",
+  )
+async def delete_by_id(register:RegisterSchema = Body(...)):
+    register = jsonable_encoder(register)
+    updated_register = await update_register(id,register)
+    return updated_register
