@@ -7,6 +7,8 @@ services:
       - ./backend/:/usr/src/app/
     ports:
       - 8004:8000
+    environment:  
+      - DATABASE_URL=mongodb+srv://mongo-heitor:root@cluster0.2eyqb11.mongodb.net/?retryWrites=true&w=majority
   # db:
   #   image: mongo:5.0
   #   # container_name: db
