@@ -9,7 +9,7 @@ RUN pip3 install -r requirements.txt
 COPY . .
 
 # RUN python3 app/main.py
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port=", "${PORT:-5000}"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port=", "${PORT}"]
 
 
 
