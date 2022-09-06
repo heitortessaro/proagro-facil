@@ -15,7 +15,7 @@ export default function App() {
   return (
     <div className="w-full h-screen max-w-[1000px] mx-auto">
       <Navbar />
-      <div className="my-8">
+      <div className="mx-auto w-1/2 my-8">
         <label className="label-main" htmlFor="service">
           Serviço Desejado
           <select
