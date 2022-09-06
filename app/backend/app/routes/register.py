@@ -4,6 +4,7 @@ from fastapi.encoders import jsonable_encoder
 from app.model.proagro import (
   add_register,
   fetch_one_register,
+  fetch_all
 )
 
 from app.schemas.proagro import (
@@ -25,6 +26,19 @@ async def add_register_data(register:RegisterSchema = Body(...)):
     return new_register
 
 @router.get(
+  "/",
+  status_code=200,
+  response_description="Retorna todos os registros já cadastrados"
+  )
+async def get_all():
+  response = await fetch_all()
+  print('chegou')
+  if response:
+    return response
+  raise HTTPException(404, "Não foram encontrados registros de eventos.")
+
+
+@router.get(
   "/{id}",
   status_code=200,
   response_description="Retorna o registro de evento com o id fornecido",
@@ -34,10 +48,3 @@ async def get_by_id(id):
     if response:
         return response 
     raise HTTPException(404, f"Não existe registro de evento com o id {id}")
-
-
-@router.get("/ping")
-async def pong():
-    # some async operation could happen here
-    # example: `notes = await get_all_notes()`
-    return {"ping": "pong!"}
