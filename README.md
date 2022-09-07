@@ -17,6 +17,7 @@ Na sequeência são listadas as principais tecnologias utilizadas para a impleme
 - [Uvicorn](https://www.uvicorn.org/): é uma implementação de servidor web ASGI para Python.
 - [Motor](https://motor.readthedocs.io/en/stable/): é um driver Python assíncrono para interação com o MongoDB.
 - [Pydantic](https://pydantic-docs.helpmanual.io/): usado para a validação de dados e gerenciamento de configurações usando anotações de tipo em Python.
+- [Geopy](https://geopy.readthedocs.io/en/stable/index.html?highlight=geodesic#): biblioteca para obtenção e tratamentos de dados geográficos. Neste projeto, foi utilizada a função para calcular a distância entre duas coordenadas do globo.
 
 ### Database
 
