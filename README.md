@@ -2,6 +2,8 @@
 
 Este projeto implementa uma versão simplificada da comunicação com o sistema Proagro Fácil da empresa Softfocus.
 
+## Instruções de utilização
+
 ## Tecnologias utilizadas
 
 Na sequeência são listadas as principais tecnologias utilizadas para a implementação do projeto.
@@ -31,3 +33,11 @@ Além da documentação das técnologias previamente cidatas, também foram util
 - [Building a CRUD App with FastAPI and MongoDB](https://testdriven.io/blog/fastapi-mongo/#update)
 - [The Ultimate FastAPI Tutorial](https://christophergs.com/tutorials/ultimate-fastapi-tutorial-pt-1-hello-world/)
 - [Setup black, isort, flake8 in VSCode](https://medium.com/@jackklpan/auto-format-and-lint-by-black-isort-flake8-in-vs-visual-studio-code-a62a3f5d940e)
+
+## Melhorias Futuras
+
+Aqui são apresentadas possíveis melhorias que ainda não foram implementadas no projeto.
+
+- Implementar testes unitários para font e back end.
+- Adicionar um sistema de login e autenticação ao sistema. Uma opção seria utilizar JWT, de modo a liberar acesso as funcionalidades das rotas apenas a usuários autorizados.
+  - Adicionar rota de login e criação de usuário.
