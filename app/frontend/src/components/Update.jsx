@@ -1,9 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import validateCPF from '../services/validations/validateCPF';
+import validateId from '../services/validations/validateId';
 import Select from './Select';
 // import eventTypes from '../services/eventTypes';
 
 export default function Update() {
+  const [id, setId] = useState('');
+  const [enableBtn, setEnableBtn] = useState(false);
+
+  useEffect(() => {
+    if (validateId(id)) {
+      setEnableBtn(true);
+    } else {
+      setEnableBtn(false);
+    }
+  }, [id]);
+
+  // const handleSubmit = async () => {
+  //   const response = await fetchDelete(id);
+  //   if (response) {
+  //     setShowMessage(true);
+  //     setMessage(response);
+  //   }
+  // };
+
   const [showMessage, setShowMessage] = useState(false);
   const [message, setMessage] = useState('teste');
   const handleSubmit = (e) => {
@@ -17,6 +37,31 @@ export default function Update() {
   return (
     <div className="w-full flex flex-col justify-center items-center ">
       <h2 className="page-title">Atualiza Cadastro</h2>
+      <div className="w-full max-w-lg px-3 mb-6 md:mb-0">
+        <label
+          className="
+            label-form"
+          htmlFor="form-name"
+        >
+          Id do Registro
+          <input
+            className="input-form"
+            id="form-name"
+            type="text"
+            placeholder="Id do Registro"
+            onChange={ ({ target }) => setId(() => target.value) }
+            value={ id }
+          />
+          {!enableBtn && (
+            <p className="text-red-500 text-xs  italic">
+              Adicione ID válido.
+            </p>)}
+          {enableBtn && (
+            <p className="text-green-800 text-xs italic">
+              ID válido.
+            </p>)}
+        </label>
+      </div>
       <form
         className="w-full max-w-lg flex flex-wrap mx-3 mb-6"
         onSubmit={ handleSubmit }
