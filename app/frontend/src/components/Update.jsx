@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import validateCPF from '../services/validateCPF';
+import validateCPF from '../services/validations/validateCPF';
 import Select from './Select';
 // import eventTypes from '../services/eventTypes';
 
