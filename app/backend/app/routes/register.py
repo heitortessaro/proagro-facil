@@ -5,6 +5,7 @@ from app.model.proagro import (
     add_register,
     fetch_one_register,
     fetch_all,
+    fetch_registers_by_cpf,
     delete_register,
     update_register,
 )
@@ -40,6 +41,20 @@ async def get_all():
     if response:
         return response
     raise HTTPException(404, "Não foram encontrados registros de eventos.")
+
+
+@router.get(
+    "/cpf/{cpf}",
+    status_code=200,
+    response_description="Retorna os registros de eventos associados ao cpf",
+)
+async def get_by_id(cpf):
+    response = await fetch_registers_by_cpf(cpf)
+    if response:
+        return response
+    return HTTPException(
+        404, f"Não existe registro de evento relacionados ao cpf {cpf}"
+    )
 
 
 @router.get(
