@@ -10,6 +10,10 @@ from app.model.proagro import (
     update_register,
 )
 
+from app.services.validations import (
+    validate_new_register,
+)
+
 from app.schemas.proagro import (
     ErrorResponseModel,
     ResponseModel,
@@ -26,6 +30,7 @@ router = APIRouter()
 )
 async def add_register_data(register: RegisterSchema = Body(...)):
     register = jsonable_encoder(register)
+    date = validate_new_register(register)
     new_register = await add_register(register)
     return new_register
 
