@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import fetchDelete from '../services/fetchDelete';
+import fetchDelete from '../services/fetches/fetchDelete';
 import validateId from '../services/validations/validateId';
 
 export default function Delete() {
