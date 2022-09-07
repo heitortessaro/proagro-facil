@@ -37,7 +37,7 @@ export default function RegisterCard({ registerData }) {
       <p>
         <span>Data da colheita:</span>
         {' '}
-        {registerData.date}
+        {registerData.date.split('-').reverse().join('-')}
       </p>
       <p>
         <span>Evento:</span>
