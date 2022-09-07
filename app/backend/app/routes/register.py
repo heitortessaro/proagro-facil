@@ -94,12 +94,10 @@ async def update_by_id(id, register: RegisterSchema = Body(...)):
     register = jsonable_encoder(register)
     if len(register) < 1:
         raise HTTPException(
-            400, "Não foram encaminhados os dados atualizados do evento."
+            400, "Não foram encaminhados os dados suficientes do evento."
         )
-    print("passou da validação do body")
     response_find = await fetch_one_register(id)
     if not response_find:
-        print("Testando")
         raise HTTPException(404, f"Não existe registro de evento com o id {id}")
     updated_register = await update_register(id, register)
     print(updated_register)
