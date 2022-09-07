@@ -32,3 +32,12 @@ body {
 .message {
   @apply border-2 border-blue-400 text-center p-3 w-full max-w-lg font-semibold m-6
 }
+
+.registerCard{
+  @apply border-2 border-blue-400 p-3 w-full max-w-lg font-semibold my-3
+}
+
+.registerCard span {
+  color: gray;
+  text-transform:uppercase ;
+}

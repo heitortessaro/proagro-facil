@@ -3,49 +3,49 @@ import PropTypes from 'prop-types';
 
 export default function RegisterCard({ registerData }) {
   return (
-    <div>
+    <div className="registerCard">
       <p>
-        Nome:
+        <span>Nome:</span>
         {' '}
         {registerData.name}
       </p>
       <p>
-        E-mail:
+        <span>E-mail:</span>
         {' '}
         {registerData.email}
       </p>
       <p>
-        CPF:
+        <span>CPF:</span>
         {' '}
         {registerData.cpf}
       </p>
       <p>
-        Localização-latitude:
+        <span>Localização-latitude:</span>
         {' '}
         {registerData.latitude}
       </p>
       <p>
-        Localização-longitude:
+        <span>Localização-longitude:</span>
         {' '}
         {registerData.longitude}
       </p>
       <p>
-        Tipo de lavoura:
+        <span>Tipo de lavoura:</span>
         {' '}
         {registerData.type}
       </p>
       <p>
-        Data da colheita:
+        <span>Data da colheita:</span>
         {' '}
         {registerData.date}
       </p>
       <p>
-        Evento:
+        <span>Evento:</span>
         {' '}
         {registerData.event}
       </p>
       <p>
-        ID do registro:
+        <span>ID do registro:</span>
         {' '}
         {registerData.id}
       </p>
