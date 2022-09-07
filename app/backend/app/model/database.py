@@ -7,4 +7,4 @@ client = motor.motor_asyncio.AsyncIOMotorClient(DATABASE_URL)
 
 database = client.proagro
 
-proagro_collection = database.get_collection('proagro_collection')
+proagro_collection = database.get_collection("proagro_collection")
