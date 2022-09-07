@@ -42,7 +42,6 @@ async def add_register_data(register: RegisterSchema = Body(...)):
 )
 async def get_all():
     response = await fetch_all()
-    print("chegou")
     if response:
         return response
     raise HTTPException(404, "Não foram encontrados registros de eventos.")
@@ -57,8 +56,8 @@ async def get_by_id(cpf):
     response = await fetch_registers_by_cpf(cpf)
     if response:
         return response
-    return HTTPException(
-        404, f"Não existe registro de evento relacionados ao cpf {cpf}"
+    raise HTTPException(
+        404, f"Não existem registros de evento relacionados ao cpf {cpf}"
     )
 
 
@@ -71,7 +70,7 @@ async def get_by_id(id):
     response = await fetch_one_register(id)
     if response:
         return response
-    return HTTPException(404, f"Não existe registro de evento com o id {id}")
+    raise HTTPException(404, f"Não existe registro de evento com o id {id}")
 
 
 @router.delete(

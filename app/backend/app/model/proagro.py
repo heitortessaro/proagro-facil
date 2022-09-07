@@ -27,8 +27,13 @@ async def add_register(register_data: dict) -> dict:
 
 # find a register using id
 async def fetch_one_register(id: str) -> dict:
+    print("--------------------")
+    print(id)
     register = await proagro_collection.find_one({"_id": ObjectId(id)})
-    return register_helper(register)
+    print(register)
+    if register:
+        return register_helper(register)
+    return False
 
 
 # find registers using date
@@ -36,7 +41,9 @@ async def fetch_registers_by_date(date: str) -> List[dict]:
     registers = []
     async for register in proagro_collection.find({"date": date}):
         registers.append(register_helper(register))
-    return registers
+    if len(registers) > 0:
+        return registers
+    return False
 
 
 # find registers using date
@@ -44,7 +51,9 @@ async def fetch_registers_by_cpf(cpf: str) -> List[dict]:
     registers = []
     async for register in proagro_collection.find({"cpf": cpf}):
         registers.append(register_helper(register))
-    return registers
+    if len(registers) > 0:
+        return registers
+    return False
 
 
 # find all registers
