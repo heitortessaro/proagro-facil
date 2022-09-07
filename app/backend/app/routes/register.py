@@ -1,11 +1,13 @@
 from fastapi import APIRouter, Body, HTTPException
 from fastapi.encoders import jsonable_encoder
+import json
 
 from app.model.proagro import (
     add_register,
     fetch_one_register,
     fetch_all,
     fetch_registers_by_cpf,
+    fetch_registers_by_date,
     delete_register,
     update_register,
 )
@@ -15,8 +17,6 @@ from app.services.validations import (
 )
 
 from app.schemas.proagro import (
-    ErrorResponseModel,
-    ResponseModel,
     RegisterSchema,
 )
 
@@ -30,8 +30,12 @@ router = APIRouter()
 )
 async def add_register_data(register: RegisterSchema = Body(...)):
     register = jsonable_encoder(register)
-    date = validate_new_register(register)
+    registers_same_date = await fetch_registers_by_date(register["date"])
+    veracity = False
+    if len(registers_same_date) > 0:
+        veracity = validate_new_register(register, registers_same_date)
     new_register = await add_register(register)
+    new_register["veracity"] = veracity
     return new_register
 
 
@@ -100,7 +104,6 @@ async def update_by_id(id, register: RegisterSchema = Body(...)):
     if not response_find:
         raise HTTPException(404, f"Não existe registro de evento com o id {id}")
     updated_register = await update_register(id, register)
-    print(updated_register)
     if updated_register:
         return updated_register
     raise HTTPException(500, "Não foi possível realizar a atualização.")

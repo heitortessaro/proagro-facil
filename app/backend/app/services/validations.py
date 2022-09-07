@@ -7,9 +7,7 @@ def validate_new_register(register, registers_same_date):
         distance = calc_distance(register, existing_register)
         print(distance)
         if not check_veracity(area_limit, distance, register, existing_register):
-            print("false")
             return False
-        print("true")
     return True
 
 
