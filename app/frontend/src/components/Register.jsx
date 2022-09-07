@@ -1,22 +1,16 @@
 import React, { useState } from 'react';
-import validateCPF from '../services/validations/validateCPF';
+import validateForms from '../services/validations/validateForms';
 import Select from './Select';
 // import eventTypes from '../services/eventTypes';
 
 export default function Register() {
   const [showMessage, setShowMessage] = useState(false);
-  const [message, setMessage] = useState('');
+  const [messages, setMessages] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const { target } = e;
     const { name, cpf, email, latitude, longitude, type, date, select: event } = target;
-    if (!validateCPF(cpf.value)) {
-      setMessage('CPF inválido');
-      setShowMessage(true);
-      return;
-    }
-    setShowMessage(true);
     const formData = {
       name: name.value,
       cpf: cpf.value,
@@ -27,14 +21,20 @@ export default function Register() {
       date: date.value,
       event: event.value,
     };
-    console.log(formData);
+    const validationMessages = validateForms(formData);
+    if (validationMessages) {
+      setMessages(validationMessages);
+      setShowMessage(true);
+      return;
+    }
+    setShowMessage(true);
   };
 
   return (
     <div className="w-full flex flex-col justify-center items-center ">
       <h2 className="page-title">Busca e Cadastro</h2>
       <form
-        className="w-full max-w-lg flex flex-wrap mx-3 mb-6"
+        className="w-full max-w-lg flex flex-wrap mx-3"
         onSubmit={ handleSubmit }
       >
         <div className="w-full px-3 mb-6 md:mb-0">
@@ -134,7 +134,7 @@ export default function Register() {
           </label>
         </div>
         <Select />
-        <div className="w-full flex justify-around px-3 mt-3 mb-6 md:mb-0">
+        <div className="w-full flex justify-around px-3 mt-3">
           <button
             className="w-1/3 button-form"
             type="submit"
@@ -145,7 +145,10 @@ export default function Register() {
           </button>
         </div>
       </form>
-      {showMessage && <p className="message">{message}</p>}
+      {showMessage && (
+        <div className="message-warning">
+          {messages.map((message) => <div key={ Math.random() }>{message}</div>)}
+        </div>)}
     </div>
   );
 }
