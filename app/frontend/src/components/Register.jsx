@@ -7,27 +7,57 @@ export default function Register() {
   const [showMessage, setShowMessage] = useState(false);
   const [messages, setMessages] = useState([]);
 
+  // const validateFormData = (e) => {
+  //   const { target } = e;
+  //   const { name, cpf, email, latitude, longitude, type, date, select: event } = target;
+  //   console.log(name.value);
+  //   const tempFormData = {
+  //     name: name.value || '',
+  //     cpf: cpf.value || '',
+  //     email: email.value || '',
+  //     latitude: latitude.value || '',
+  //     longitude: longitude.value || '',
+  //     type: type.value,
+  //     date: date.value,
+  //     event: event.value,
+  //   };
+  //   const validationMessages = validateForms(tempFormData);
+  //   if (validationMessages) {
+  //     setMessages(validationMessages);
+  //     setShowMessage(true);
+  //     setEnableBtn(false);
+  //     return;
+  //   }
+  //   setFormData(tempFormData);
+  //   setEnableBtn(true);
+  //   setShowMessage(false);
+  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const { target } = e;
     const { name, cpf, email, latitude, longitude, type, date, select: event } = target;
     const formData = {
-      name: name.value,
-      cpf: cpf.value,
-      email: email.value,
-      latitude: latitude.value,
-      longitude: longitude.value,
+      name: name.value || '',
+      cpf: cpf.value || '',
+      email: email.value || '',
+      latitude: latitude.value || '',
+      longitude: longitude.value || '',
       type: type.value,
       date: date.value,
       event: event.value,
     };
     const validationMessages = validateForms(formData);
+    console.log(validationMessages);
     if (validationMessages) {
       setMessages(validationMessages);
       setShowMessage(true);
+      // setEnableBtn(false);
       return;
     }
-    setShowMessage(true);
+    setMessages([]);
+    setShowMessage(false);
+    console.log(formData);
   };
 
   return (
@@ -36,6 +66,7 @@ export default function Register() {
       <form
         className="w-full max-w-lg flex flex-wrap mx-3"
         onSubmit={ handleSubmit }
+        // onChange={ validateFormData }
       >
         <div className="w-full px-3 mb-6 md:mb-0">
           <label
@@ -135,14 +166,17 @@ export default function Register() {
         </div>
         <Select />
         <div className="w-full flex justify-around px-3 mt-3">
+          {/* {enableBtn && ( */}
           <button
             className="w-1/3 button-form"
             type="submit"
             value="register"
             name="register"
+            // disabled={ !enableBtn }
           >
             Cadastrar
           </button>
+          {/* )} */}
         </div>
       </form>
       {showMessage && (

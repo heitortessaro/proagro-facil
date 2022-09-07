@@ -10,8 +10,7 @@ function validateForms({ name, cpf, email, latitude, longitude }) {
   if (!EmailValidator.validate(email)) messages.push('Forneça email válido.');
   if (!validateCoordenate(latitude)) messages.push('Forneça latitude válida.');
   if (!validateCoordenate(longitude)) messages.push('Forneça longitude válida.');
-  console.log(messages);
-  if (messages.length <= 0) return true;
+  if (messages.length <= 0) return false;
   return messages;
 }
 
