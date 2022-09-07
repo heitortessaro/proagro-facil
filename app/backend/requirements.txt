@@ -2,6 +2,7 @@ fastapi
 uvicorn
 motor==2.5.1
 pydantic[email]
+geopy==2.2.0 
 
 # dev
 pytest==6.2.3

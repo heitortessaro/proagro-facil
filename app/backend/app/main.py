@@ -20,5 +20,3 @@ app.add_middleware(
 
 app.include_router(RegisterRouter, tags=["Register"], prefix="/register")
 app.include_router(ping.router)
-
-
