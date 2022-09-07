@@ -1,12 +1,18 @@
-const fetchBusca = async () => {
-  const url = '';
+const fetchBusca = async (id) => {
+  const successfullyFetch = 200;
+  const notFound = 404;
+  const url = `http://0.0.0.0:8004/register/${id}`;
+
   const response = await fetch(url);
-  const fetchOk = 200;
-  if (response.status === fetchOk) {
-    const data = await resolve.json();
+  const data = await response.json();
+  console.log(data);
+
+  if (response.status === successfullyFetch) {
     return data;
+  } if (response.status === notFound) {
+    return data.detail;
   }
-  return { message: 'falha na requisição' };
+  return false;
 };
 
 export default fetchBusca;
