@@ -48,7 +48,7 @@ export default function Register() {
     <div className="w-full flex flex-col justify-center items-center ">
       <h2 className="page-title">Busca e Cadastro</h2>
       <form
-        className="w-full max-w-lg flex flex-wrap mx-3"
+        className="w-full max-w-lg flex flex-wrap mx-3 mb-3"
         onSubmit={ handleSubmit }
         // onChange={ validateFormData }
       >

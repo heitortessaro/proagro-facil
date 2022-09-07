@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import validateForms from '../services/validations/validateForms';
 import validateId from '../services/validations/validateId';
+import fetchAtualizacao from '../services/fetches/fetchAtualizacao';
 import Select from './Select';
 // import eventTypes from '../services/eventTypes';
 
@@ -9,6 +10,7 @@ export default function Update() {
   const [enableBtn, setEnableBtn] = useState(false);
   const [showMessages, setShowMessages] = useState(false);
   const [messages, setMessages] = useState([]);
+  const [sucessMessage, setSucessMessage] = useState('');
 
   useEffect(() => {
     if (validateId(id)) {
@@ -39,17 +41,16 @@ export default function Update() {
       // setEnableBtn(false);
       return;
     }
-    setMessages([]);
-    setShowMessages(false);
-    // const data = await fetchCadastro(formData);
-    // if (!data.veracity) {
-    //   setCompleteMessage([
-    //     'Cadastro realizado com sucesso',
-    //     'Houve divergência quanto ao fenômeno. Por favor, verificar.',
-    //   ]);
-    // } else {
-    //   setCompleteMessage(['Cadastro realizado com sucesso']);
-    // }
+    const { sucess, message } = await fetchAtualizacao(id, formData);
+    if (sucess) {
+      setMessages([]);
+      setShowMessages(false);
+      setSucessMessage(message);
+    } else {
+      setSucessMessage('');
+      setMessages([message]);
+      setShowMessages(true);
+    }
     // target.reset();
   };
 
@@ -82,7 +83,7 @@ export default function Update() {
         </label>
       </div>
       <form
-        className="w-full max-w-lg flex flex-wrap mx-3"
+        className="w-full max-w-lg flex flex-wrap mx-3 mb-3"
         onSubmit={ handleSubmit }
       >
         <div className="w-full px-3 mb-6 md:mb-0">
@@ -200,6 +201,8 @@ export default function Update() {
         <div className="message-warning">
           {messages.map((message) => <div key={ Math.random() }>{message}</div>)}
         </div>)}
+      {(!showMessages && sucessMessage !== '') && (
+        <p className="message-sucess">{sucessMessage}</p>)}
       {/* {!showMessages && (
         <div className="w-full flex flex-col items-center">
           {completeMessage.map((message) => (
