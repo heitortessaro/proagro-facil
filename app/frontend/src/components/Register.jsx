@@ -1,39 +1,15 @@
 import React, { useState } from 'react';
+import fetchCadastro from '../services/fetches/fetchCadastro';
 import validateForms from '../services/validations/validateForms';
 import Select from './Select';
 // import eventTypes from '../services/eventTypes';
 
 export default function Register() {
-  const [showMessage, setShowMessage] = useState(false);
+  const [showMessages, setShowMessages] = useState(false);
   const [messages, setMessages] = useState([]);
+  const [completeMessage, setCompleteMessage] = useState([]);
 
-  // const validateFormData = (e) => {
-  //   const { target } = e;
-  //   const { name, cpf, email, latitude, longitude, type, date, select: event } = target;
-  //   console.log(name.value);
-  //   const tempFormData = {
-  //     name: name.value || '',
-  //     cpf: cpf.value || '',
-  //     email: email.value || '',
-  //     latitude: latitude.value || '',
-  //     longitude: longitude.value || '',
-  //     type: type.value,
-  //     date: date.value,
-  //     event: event.value,
-  //   };
-  //   const validationMessages = validateForms(tempFormData);
-  //   if (validationMessages) {
-  //     setMessages(validationMessages);
-  //     setShowMessage(true);
-  //     setEnableBtn(false);
-  //     return;
-  //   }
-  //   setFormData(tempFormData);
-  //   setEnableBtn(true);
-  //   setShowMessage(false);
-  // };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { target } = e;
     const { name, cpf, email, latitude, longitude, type, date, select: event } = target;
@@ -48,16 +24,24 @@ export default function Register() {
       event: event.value,
     };
     const validationMessages = validateForms(formData);
-    console.log(validationMessages);
     if (validationMessages) {
       setMessages(validationMessages);
-      setShowMessage(true);
+      setShowMessages(true);
       // setEnableBtn(false);
       return;
     }
     setMessages([]);
-    setShowMessage(false);
-    console.log(formData);
+    setShowMessages(false);
+    const data = await fetchCadastro(formData);
+    if (!data.veracity) {
+      setCompleteMessage([
+        'Cadastro realizado com sucesso',
+        'Houve divergência quanto ao fenômeno. Por favor, verificar.',
+      ]);
+    } else {
+      setCompleteMessage(['Cadastro realizado com sucesso']);
+    }
+    target.reset();
   };
 
   return (
@@ -179,9 +163,14 @@ export default function Register() {
           {/* )} */}
         </div>
       </form>
-      {showMessage && (
+      {showMessages && (
         <div className="message-warning">
           {messages.map((message) => <div key={ Math.random() }>{message}</div>)}
+        </div>)}
+      {!showMessages && (
+        <div className="w-full flex flex-col items-center">
+          {completeMessage.map((message) => (
+            <div className="message-sucess" key={ Math.random() }>{message}</div>))}
         </div>)}
     </div>
   );
