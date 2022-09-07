@@ -41,9 +41,7 @@ async def fetch_registers_by_date(date: str) -> List[dict]:
     registers = []
     async for register in proagro_collection.find({"date": date}):
         registers.append(register_helper(register))
-    if len(registers) > 0:
-        return registers
-    return False
+    return registers
 
 
 # find registers using date
