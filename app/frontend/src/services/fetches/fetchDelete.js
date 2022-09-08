@@ -1,8 +1,8 @@
+import baseURL from '../baseURL';
+
 const fetchDelete = async (id) => {
-  const url = `http://0.0.0.0:8004/register/${id}`;
-  console.log(url);
+  const url = `${baseURL}/register/${id}`;
   const response = await fetch(url, { method: 'DELETE' });
-  console.log(response);
   const successfullyRemoved = 204;
   const notFound = 404;
   if (response.status === successfullyRemoved) {

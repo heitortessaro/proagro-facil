@@ -96,6 +96,7 @@ async def delete_by_id(id):
     response_description="Atualiza o registro de evento com o id fornecido usando os dados do body",
 )
 async def update_by_id(id, register: RegisterSchema = Body(...)):
+    print("---------------")
     register = jsonable_encoder(register)
     if len(register) < 1:
         raise HTTPException(

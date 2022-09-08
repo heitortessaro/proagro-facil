@@ -1,5 +1,7 @@
+import baseURL from '../baseURL';
+
 const fetchCadastro = async (data) => {
-  const url = 'http://0.0.0.0:8004/register';
+  const url = `${baseURL}/register`;
   const response = await fetch(url, {
     method: 'POST',
     headers: {

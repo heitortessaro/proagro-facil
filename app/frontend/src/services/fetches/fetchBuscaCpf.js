@@ -1,7 +1,9 @@
+import baseURL from '../baseURL';
+
 const fetchBuscaCpf = async (cpf) => {
   const successfullyFetch = 200;
   const notFound = 404;
-  const url = `http://0.0.0.0:8004/register/cpf/${cpf}`;
+  const url = `${baseURL}/register/cpf/${cpf}`;
 
   const response = await fetch(url);
   const data = await response.json();

@@ -1,8 +1,10 @@
+import baseURL from '../baseURL';
+
 const fetchAtualizacao = async (id, data) => {
   const sucess = 200;
   const notFound = 404;
   const invalidData = 400;
-  const url = `http://0.0.0.0:8004/register/${id}`;
+  const url = `${baseURL}/register/${id}`;
   const response = await fetch(url, {
     method: 'PUT',
     headers: {
