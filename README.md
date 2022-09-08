@@ -4,7 +4,7 @@ Este projeto implementa uma versão simplificada da comunicação com o sistema 
 
 A documentação da API implementada está sendo construída utilizando a ferramenta Postman. Você pode acessar a última versão através dest [link](https://documenter.getpostman.com/view/21397186/VVBUy7HF). Você também pode acessar a documentação gerada automaticamente pelo FastAPI utilizando esse [link](https://proagro-facil-backend.herokuapp.com/docs).
 
-Na próxima seção são apresentados os passos para rodar as aplicações front e back end localmente. No entanto, você também pode acessar o deploy da aplicação do [Front End]() e do [Back End](https://proagro-facil-backend.herokuapp.com/).
+Na próxima seção são apresentados os passos para rodar as aplicações front e back end localmente. No entanto, você também pode acessar o deploy da aplicação do [Front End](http://proagro-facil-heitor.surge.sh/) e do [Back End](https://proagro-facil-backend.herokuapp.com/).
 
 ## Rodando o Projeto na sua máquina
 
@@ -47,7 +47,13 @@ Passo 5. Inslate todas as dependências:
 npm install
 ```
 
-Step 6. Rode os containers da aplicação
+Passo 6. Mude para a pasta app:
+
+```bash
+cd app
+```
+
+Step 7. Rode os containers da aplicação
 
 ```bash
 docker-compose up -d --build
