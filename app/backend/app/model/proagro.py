@@ -27,8 +27,6 @@ async def add_register(register_data: dict) -> dict:
 
 # find a register using id
 async def fetch_one_register(id: str) -> dict:
-    print("--------------------")
-    print(id)
     register = await proagro_collection.find_one({"_id": ObjectId(id)})
     print(register)
     if register:
@@ -41,9 +39,7 @@ async def fetch_registers_by_date(date: str) -> List[dict]:
     registers = []
     async for register in proagro_collection.find({"date": date}):
         registers.append(register_helper(register))
-    if len(registers) > 0:
-        return registers
-    return False
+    return registers
 
 
 # find registers using date
@@ -75,6 +71,7 @@ async def delete_register(id: str):
 
 # update a register with matching id
 async def update_register(id: str, data: dict) -> dict:
+    print("chegou")
     updated_register = await proagro_collection.update_one(
         {"_id": ObjectId(id)}, {"$set": data}
     )

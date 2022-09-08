@@ -1,41 +1,56 @@
 import React, { useState } from 'react';
-import validateCPF from '../services/validateCPF';
+import fetchCadastro from '../services/fetches/fetchCadastro';
+import validateForms from '../services/validations/validateForms';
 import Select from './Select';
 // import eventTypes from '../services/eventTypes';
 
 export default function Register() {
-  const [showMessage, setShowMessage] = useState(false);
-  const [message, setMessage] = useState('');
+  const [showMessages, setShowMessages] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const [completeMessage, setCompleteMessage] = useState([]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { target } = e;
     const { name, cpf, email, latitude, longitude, type, date, select: event } = target;
-    if (!validateCPF(cpf.value)) {
-      setMessage('CPF inválido');
-      setShowMessage(true);
-      return;
-    }
-    setShowMessage(true);
     const formData = {
-      name: name.value,
-      cpf: cpf.value,
-      email: email.value,
-      latitude: latitude.value,
-      longitude: longitude.value,
+      name: name.value || '',
+      cpf: cpf.value || '',
+      email: email.value || '',
+      latitude: latitude.value || '',
+      longitude: longitude.value || '',
       type: type.value,
       date: date.value,
       event: event.value,
     };
-    console.log(formData);
+    const validationMessages = validateForms(formData);
+    if (validationMessages) {
+      setMessages(validationMessages);
+      setShowMessages(true);
+      // setEnableBtn(false);
+      return;
+    }
+    setMessages([]);
+    setShowMessages(false);
+    const data = await fetchCadastro(formData);
+    if (!data.veracity) {
+      setCompleteMessage([
+        'Cadastro realizado com sucesso',
+        'Houve divergência quanto ao fenômeno. Por favor, verificar.',
+      ]);
+    } else {
+      setCompleteMessage(['Cadastro realizado com sucesso']);
+    }
+    target.reset();
   };
 
   return (
     <div className="w-full flex flex-col justify-center items-center ">
       <h2 className="page-title">Busca e Cadastro</h2>
       <form
-        className="w-full max-w-lg flex flex-wrap mx-3 mb-6"
+        className="w-full max-w-lg flex flex-wrap mx-3 mb-3"
         onSubmit={ handleSubmit }
+        // onChange={ validateFormData }
       >
         <div className="w-full px-3 mb-6 md:mb-0">
           <label
@@ -134,18 +149,29 @@ export default function Register() {
           </label>
         </div>
         <Select />
-        <div className="w-full flex justify-around px-3 mt-3 mb-6 md:mb-0">
+        <div className="w-full flex justify-around px-3 mt-3">
+          {/* {enableBtn && ( */}
           <button
             className="w-1/3 button-form"
             type="submit"
             value="register"
             name="register"
+            // disabled={ !enableBtn }
           >
             Cadastrar
           </button>
+          {/* )} */}
         </div>
       </form>
-      {showMessage && <p className="message">{message}</p>}
+      {showMessages && (
+        <div className="message-warning">
+          {messages.map((message) => <div key={ Math.random() }>{message}</div>)}
+        </div>)}
+      {!showMessages && (
+        <div className="w-full flex flex-col items-center">
+          {completeMessage.map((message) => (
+            <div className="message-sucess" key={ Math.random() }>{message}</div>))}
+        </div>)}
     </div>
   );
 }

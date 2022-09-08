@@ -30,5 +30,25 @@ body {
 }
 
 .message {
-  @apply border border-stone-700 p-3 w-1/2 font-semibold
+  @apply border-2 border-blue-400 text-center p-3 w-full max-w-lg font-semibold m-6
+}
+
+.message-warning {
+  @apply border-2 border-red-600 text-center p-3 w-full max-w-lg font-semibold m-6
+}
+
+
+.message-sucess {
+  @apply border-2 border-green-600 text-center p-3 w-full max-w-lg font-semibold my-2
+}
+
+
+
+.registerCard{
+  @apply border-2 border-blue-400 p-3 w-full max-w-lg font-semibold my-3
+}
+
+.registerCard span {
+  color: gray;
+  text-transform:uppercase ;
 }

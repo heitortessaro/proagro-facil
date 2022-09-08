@@ -31,6 +31,7 @@ router = APIRouter()
 async def add_register_data(register: RegisterSchema = Body(...)):
     register = jsonable_encoder(register)
     registers_same_date = await fetch_registers_by_date(register["date"])
+    print(registers_same_date)
     veracity = False
     if len(registers_same_date) > 0:
         veracity = validate_new_register(register, registers_same_date)
@@ -95,6 +96,7 @@ async def delete_by_id(id):
     response_description="Atualiza o registro de evento com o id fornecido usando os dados do body",
 )
 async def update_by_id(id, register: RegisterSchema = Body(...)):
+    print("---------------")
     register = jsonable_encoder(register)
     if len(register) < 1:
         raise HTTPException(

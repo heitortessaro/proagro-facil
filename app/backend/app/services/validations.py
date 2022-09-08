@@ -5,7 +5,6 @@ def validate_new_register(register, registers_same_date):
     area_limit = 10
     for existing_register in registers_same_date:
         distance = calc_distance(register, existing_register)
-        print(distance)
         if not check_veracity(area_limit, distance, register, existing_register):
             return False
     return True
